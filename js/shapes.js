@@ -1,5 +1,3 @@
-// plz commit changes
-
 window.onload = function() {
     document.getElementById("hello-sample").onclick = sayHelloStaff;
     document.getElementById("rectangle-sample").onclick = drawRectangleStaff;
@@ -28,7 +26,22 @@ window.onload = function() {
  */
 
 const sayHello = function() {
-    // write your exercise 1 code here
+    const canvas = document.getElementById("student-canvas-1");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let endLoop = false;
+    let input;
+    while (endLoop === false) {
+        input = window.prompt("Message");
+        if (input.length > 50) {
+            window.alert("Your message is too long. Keep it under 50 characters.");
+        }
+        else {
+            endLoop = true;
+        }
+    }
+    ctx.font = "48px sans-serif";
+    ctx.strokeText(input, 30, 70, 994);
 };
 
 /*
