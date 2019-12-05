@@ -1,3 +1,5 @@
+// plz commit changes
+
 window.onload = function() {
     document.getElementById("hello-sample").onclick = sayHelloStaff;
     document.getElementById("rectangle-sample").onclick = drawRectangleStaff;
