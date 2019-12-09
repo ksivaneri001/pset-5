@@ -129,7 +129,7 @@ const drawTriangle = function() {
     const canvas = document.getElementById("student-canvas-4");
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    let array = [null, null, null]
+    let array = [null, null, null];
     let height;
     let hypotenuse;
     let base;
@@ -141,11 +141,29 @@ const drawTriangle = function() {
         if (array[0] === null || array[1] === null || array[2] === null) {
             endLoop = true;
         }
-        height = Math.min(Number(array));
-        hypotenuse = Math.max(Number(array));
+        array[0] = Number(array[0]);
+        array[1] = Number(array[1]);
+        array[2] = Number(array[2]);
         array.sort();
-        base = Number(array[1]);
+        height = array[0];
+        base = array[1];
+        hypotenuse = array[2];
+        if (Number.isNaN(height) || Number.isNaN(base) || Number.isNaN(hypotenuse)) {
+            window.alert("One of your sides is not a number.");
+        }
+        else if ((25 + height) > canvas.height || (25 + base) > canvas.width) {
+            window.alert("You triangle won't fit on the canvas.")
+        }
+        else if (Math.pow(height, 2) + Math.pow(base, 2) == Math.pow(hypotenuse, 2)) {
+            endLoop = true;
+        }
     }
+    ctx.beginPath();
+    ctx.moveTo(25, 25);
+    ctx.lineTo(25, 25 + height);
+    ctx.lineTo(25 + base, 25 + height);
+    ctx.lineTo(25, 25);
+    ctx.stroke();
 };
 
 /*
