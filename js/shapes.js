@@ -19,6 +19,7 @@ window.onload = function() {
     // equivalent set of six event listeners for your solutions. the first one is done for you.
 
     document.getElementById("hello").onclick = sayHello;
+    document.getElementById("rectangle").onclick = drawRectangle;
 }
 
 /*
@@ -32,7 +33,7 @@ const sayHello = function() {
     let endLoop = false;
     let input;
     while (endLoop === false) {
-        input = window.prompt("Message");
+        input = window.prompt("Message:");
         if (input.length > 50) {
             window.alert("Your message is too long. Keep it under 50 characters.");
         }
@@ -49,7 +50,42 @@ const sayHello = function() {
  */
 
 const drawRectangle = function() {
-    // write your exercise 2 code here
+    const canvas = document.getElementById("student-canvas-2");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let endLoop = false;
+    let width;
+    let height;
+    let x;
+    let y;
+    while (endLoop === false) {
+        width = window.prompt("Width:");
+        height = window.prompt("Height:");
+        x = window.prompt("X:");
+        y = window.prompt("Y:");
+        if (width === null || height === null || x === null || y === null) {
+            endLoop = true;
+        }
+        else if (Number(width) < 1 || Number(width) > canvas.width) {
+            window.alert("Your width must be between 1 and 1024.");
+        }
+        else if (Number(height) < 1 || Number(height) > canvas.height) {
+            window.alert("Your height must be between 1 and 512.");
+        }
+        else if (Number(x) < 1) {
+            window.alert("Your x-coordinate must be between 1 and 1024.");
+        }
+        else if (Number(y) < 1) {
+            window.alert("Your y-coordinate must be between 1 and 512.");
+        }
+        else if ((Number(x) + Number(width)) > canvas.width || (Number(y) + Number(height)) > canvas.height) {
+            window.alert("Your rectangle won't fit on the canvas.");
+        }
+        else {
+            endLoop = true;
+        }
+        ctx.strokeRect(x, y, width, height);
+    }
 };
 
 /*
@@ -57,7 +93,7 @@ const drawRectangle = function() {
  */
 
 const drawColoredRectangle = function() {
-    // write your exercise 3 code here
+
 };
 
 /*
@@ -65,7 +101,7 @@ const drawColoredRectangle = function() {
  */
 
 const drawTriangle = function() {
-    // write your exercise 4 code here
+
 };
 
 /*
@@ -73,7 +109,7 @@ const drawTriangle = function() {
  */
 
 const drawFace = function() {
-    // write your exercise 4 code here
+
 };
 
 /*
@@ -81,5 +117,5 @@ const drawFace = function() {
  */
 
 const drawPyramid = function() {
-    // write your exercise 5 code here
+
 };
