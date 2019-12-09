@@ -20,6 +20,7 @@ window.onload = function() {
 
     document.getElementById("hello").onclick = sayHello;
     document.getElementById("rectangle").onclick = drawRectangle;
+    document.getElementById("colored-rectangle").onclick = drawColoredRectangle;
 }
 
 /*
@@ -66,6 +67,9 @@ const drawRectangle = function() {
         if (width === null || height === null || x === null || y === null) {
             endLoop = true;
         }
+        else if (Number.isNaN(Number(width)) || Number.isNaN(Number(height)) || Number.isNaN(Number(x)) || Number.isNaN(Number(y))) {
+            window.alert("One of your values is not a number.");
+        }
         else if (Number(width) < 1 || Number(width) > canvas.width) {
             window.alert("Your width must be between 1 and 1024.");
         }
@@ -84,8 +88,8 @@ const drawRectangle = function() {
         else {
             endLoop = true;
         }
-        ctx.strokeRect(x, y, width, height);
     }
+    ctx.strokeRect(x, y, width, height);
 };
 
 /*
@@ -93,7 +97,27 @@ const drawRectangle = function() {
  */
 
 const drawColoredRectangle = function() {
-
+    const canvas = document.getElementById("student-canvas-3");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let color;
+    let endLoop = false;
+    let colorLowerCase;
+    while (endLoop === false) {
+        color = window.prompt("Color:");
+        colorLowerCase = color.toLowerCase();
+        if (colorLowerCase === "black" || colorLowerCase === "blue" || colorLowerCase === "green" || colorLowerCase === "orange" || colorLowerCase === "purple" || colorLowerCase === "red" || colorLowerCase === "yellow") {
+            endLoop = true;
+        }
+        else if (color === null) {
+            endLoop = true;
+        }
+        else {
+            window.alert(color + " is not a supported color.")
+        }
+    }
+    ctx.fillStyle = colorLowerCase;
+    ctx.fillRect(10, 10, 100, 50);
 };
 
 /*
