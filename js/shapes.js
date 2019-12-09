@@ -22,6 +22,7 @@ window.onload = function() {
     document.getElementById("rectangle").onclick = drawRectangle;
     document.getElementById("colored-rectangle").onclick = drawColoredRectangle;
     document.getElementById("triangle").onclick = drawTriangle;
+    document.getElementById("smile").onclick = drawFace;
 }
 
 /*
@@ -152,7 +153,7 @@ const drawTriangle = function() {
             window.alert("One of your sides is not a number.");
         }
         else if ((25 + height) > canvas.height || (25 + base) > canvas.width) {
-            window.alert("You triangle won't fit on the canvas.")
+            window.alert("Your triangle won't fit on the canvas.")
         }
         else if (Math.pow(height, 2) + Math.pow(base, 2) == Math.pow(hypotenuse, 2)) {
             endLoop = true;
@@ -171,7 +172,15 @@ const drawTriangle = function() {
  */
 
 const drawFace = function() {
+    const canvas = document.getElementById("student-canvas-4");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let radius;
+    let eyes;
+    let endLoop = false;
+    while (endLoop === false) {
 
+    }
 };
 
 /*
