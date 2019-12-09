@@ -21,6 +21,7 @@ window.onload = function() {
     document.getElementById("hello").onclick = sayHello;
     document.getElementById("rectangle").onclick = drawRectangle;
     document.getElementById("colored-rectangle").onclick = drawColoredRectangle;
+    document.getElementById("triangle").onclick = drawTriangle;
 }
 
 /*
@@ -125,7 +126,26 @@ const drawColoredRectangle = function() {
  */
 
 const drawTriangle = function() {
-
+    const canvas = document.getElementById("student-canvas-4");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let array = [null, null, null]
+    let height;
+    let hypotenuse;
+    let base;
+    let endLoop = false;
+    while (endLoop === false) {
+        array[0] = window.prompt("Side 1:");
+        array[1] = window.prompt("Side 2:");
+        array[2] = window.prompt("Side 3:");
+        if (array[0] === null || array[1] === null || array[2] === null) {
+            endLoop = true;
+        }
+        height = Math.min(Number(array));
+        hypotenuse = Math.max(Number(array));
+        array.sort();
+        base = Number(array[1]);
+    }
 };
 
 /*
