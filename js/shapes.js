@@ -37,7 +37,11 @@ const sayHello = function() {
     let input;
     while (endLoop === false) {
         input = window.prompt("Message:");
-        if (input.length > 50) {
+        if (input === null) {
+            input = "";
+            endLoop = true;
+        }
+        else if (input.length > 50) {
             window.alert("Your message is too long. Keep it under 50 characters.");
         }
         else {
@@ -67,6 +71,10 @@ const drawRectangle = function() {
         x = window.prompt("X:");
         y = window.prompt("Y:");
         if (width === null || height === null || x === null || y === null) {
+            width = null;
+            height = null;
+            x = null;
+            y = null;
             endLoop = true;
         }
         else if (Number.isNaN(Number(width)) || Number.isNaN(Number(height)) || Number.isNaN(Number(x)) || Number.isNaN(Number(y))) {
@@ -104,22 +112,28 @@ const drawColoredRectangle = function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let color;
     let endLoop = false;
+    let doDraw = true;
     let colorLowerCase;
     while (endLoop === false) {
         color = window.prompt("Color:");
-        colorLowerCase = color.toLowerCase();
-        if (colorLowerCase === "black" || colorLowerCase === "blue" || colorLowerCase === "green" || colorLowerCase === "orange" || colorLowerCase === "purple" || colorLowerCase === "red" || colorLowerCase === "yellow") {
-            endLoop = true;
-        }
-        else if (color === null) {
+        if (color === null) {
+            doDraw = false;
             endLoop = true;
         }
         else {
-            window.alert(color + " is not a supported color.")
+            colorLowerCase = color.toLowerCase();
+            if (colorLowerCase === "black" || colorLowerCase === "blue" || colorLowerCase === "green" || colorLowerCase === "orange" || colorLowerCase === "purple" || colorLowerCase === "red" || colorLowerCase === "yellow") {
+                endLoop = true;
+            }
+            else {
+                window.alert(color + " is not a supported color.")
+            }
         }
     }
-    ctx.fillStyle = colorLowerCase;
-    ctx.fillRect(10, 10, 100, 50);
+    if (doDraw) {
+        ctx.fillStyle = colorLowerCase;
+        ctx.fillRect(10, 10, 100, 50);
+    }
 };
 
 /*
@@ -181,10 +195,11 @@ const drawFace = function() {
     let endLoop = false;
     while (endLoop === false) {
         radius = window.prompt("Radius:");
+        let notANumberCheck = Number(radius);
         if (radius === null) {
             endLoop = true;
         }
-        else if (Number.isNaN(radius)) {
+        else if (Number.isNaN(notANumberCheck)) {
             window.alert("Your radius is not a number.");
         }
         else if (Number(radius < 32)) {
