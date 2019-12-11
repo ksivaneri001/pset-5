@@ -172,15 +172,46 @@ const drawTriangle = function() {
  */
 
 const drawFace = function() {
-    const canvas = document.getElementById("student-canvas-4");
+    const canvas = document.getElementById("student-canvas-5");
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let radius;
-    let eyes;
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
     let endLoop = false;
     while (endLoop === false) {
-
+        radius = window.prompt("Radius:");
+        if (radius === null) {
+            endLoop = true;
+        }
+        else if (Number.isNaN(radius)) {
+            window.alert("Your radius is not a number.");
+        }
+        else if (Number(radius < 32)) {
+            window.alert("Your radius must be at least 32.");
+        }
+        else if (Number(radius) + centerX > canvas.width || Number(radius) + centerY > canvas.height) {
+            window.alert("Your smiley face won't fit on the canvas.");
+        }
+        else {
+            endLoop = true;
+        }
     }
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(centerX - (0.4 * radius), centerY - (0.4 * radius), 0.15 * radius, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(centerX + (0.4 * radius), centerY - (0.4 * radius), 0.15 * radius, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 0.7 * radius, 0, Math.PI);
+    ctx.stroke();
 };
 
 /*
