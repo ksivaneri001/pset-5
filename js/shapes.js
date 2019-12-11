@@ -23,6 +23,7 @@ window.onload = function() {
     document.getElementById("colored-rectangle").onclick = drawColoredRectangle;
     document.getElementById("triangle").onclick = drawTriangle;
     document.getElementById("smile").onclick = drawFace;
+    document.getElementById("pyramid").onclick = drawPyramid;
 }
 
 /*
@@ -195,11 +196,10 @@ const drawFace = function() {
     let endLoop = false;
     while (endLoop === false) {
         radius = window.prompt("Radius:");
-        let notANumberCheck = Number(radius);
         if (radius === null) {
             endLoop = true;
         }
-        else if (Number.isNaN(notANumberCheck)) {
+        else if (Number.isNaN(Number(radius))) {
             window.alert("Your radius is not a number.");
         }
         else if (Number(radius < 32)) {
@@ -234,5 +234,33 @@ const drawFace = function() {
  */
 
 const drawPyramid = function() {
-
+    const canvas = document.getElementById("student-canvas-6");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let side;
+    let endLoop = false;
+    while (endLoop === false) {
+        side = window.prompt("Side:");
+        if (side === null) {
+            endLoop = true;
+        }
+        else if (Number.isNaN(Number(side))) {
+            window.alert("Your block size is not a number.");
+        }
+        else if (Number(side) < 1) {
+            window.alert("Your block size must be at least 1.");
+        }
+        else {
+            endLoop = true;
+        }
+    }
+    for (let i = 5; i > 0; i--) {
+        let x = 10;
+        let y = canvas.height - 10 - side;
+        for (let j = x; j < (x + (side * i)); j = j + side) {
+            ctx.strokeRect(j, y, side, side);
+        }
+        x = x + side / 2;
+        y = y - side;
+    }
 };
