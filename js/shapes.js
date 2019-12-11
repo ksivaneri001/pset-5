@@ -145,33 +145,39 @@ const drawTriangle = function() {
     const canvas = document.getElementById("student-canvas-4");
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    let array = [null, null, null];
+    let sides = [null, null, null];
     let height;
     let hypotenuse;
     let base;
     let endLoop = false;
     while (endLoop === false) {
-        array[0] = window.prompt("Side 1:");
-        array[1] = window.prompt("Side 2:");
-        array[2] = window.prompt("Side 3:");
-        if (array[0] === null || array[1] === null || array[2] === null) {
+        sides[0] = window.prompt("Side 1:");
+        sides[1] = window.prompt("Side 2:");
+        sides[2] = window.prompt("Side 3:");
+        if (sides[0] === null || sides[1] === null || sides[2] === null) {
+            sides[0] = 0;
+            sides[1] = 0;
+            sides[2] = 0;
             endLoop = true;
         }
-        array[0] = Number(array[0]);
-        array[1] = Number(array[1]);
-        array[2] = Number(array[2]);
-        array.sort();
-        height = array[0];
-        base = array[1];
-        hypotenuse = array[2];
+        sides[0] = Number(sides[0]);
+        sides[1] = Number(sides[1]);
+        sides[2] = Number(sides[2]);
+        sides.sort((a,b)=>(a-b));
+        height = sides[0];
+        base = sides[1];
+        hypotenuse = sides[2];
         if (Number.isNaN(height) || Number.isNaN(base) || Number.isNaN(hypotenuse)) {
             window.alert("One of your sides is not a number.");
         }
         else if ((25 + height) > canvas.height || (25 + base) > canvas.width) {
             window.alert("Your triangle won't fit on the canvas.")
         }
-        else if (Math.pow(height, 2) + Math.pow(base, 2) == Math.pow(hypotenuse, 2)) {
+        else if (height**2 + base**2 == hypotenuse**2) {
             endLoop = true;
+        }
+        else {
+            window.alert("That's not a valid right triangle.");
         }
     }
     ctx.beginPath();
