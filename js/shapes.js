@@ -24,6 +24,7 @@ const sayHello = function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let endLoop = false;
     let input;
+
     while (endLoop === false) {
         input = window.prompt("Message:");
         if (input === null) {
@@ -37,6 +38,7 @@ const sayHello = function() {
             endLoop = true;
         }
     }
+
     ctx.font = "48px sans-serif";
     ctx.strokeText(input, 30, 70, 994);
 };
@@ -54,6 +56,7 @@ const drawRectangle = function() {
     let height;
     let x;
     let y;
+
     while (endLoop === false) {
         width = window.prompt("Width:");
         height = window.prompt("Height:");
@@ -88,6 +91,7 @@ const drawRectangle = function() {
             endLoop = true;
         }
     }
+
     ctx.strokeRect(x, y, width, height);
 };
 
@@ -103,6 +107,7 @@ const drawColoredRectangle = function() {
     let endLoop = false;
     let doDraw = true;
     let colorLowerCase;
+
     while (endLoop === false) {
         color = window.prompt("Color:");
         if (color === null) {
@@ -119,6 +124,7 @@ const drawColoredRectangle = function() {
             }
         }
     }
+
     if (doDraw) {
         ctx.fillStyle = colorLowerCase;
         ctx.fillRect(10, 10, 100, 50);
@@ -138,6 +144,7 @@ const drawTriangle = function() {
     let hypotenuse;
     let base;
     let endLoop = false;
+
     while (endLoop === false) {
         sides[0] = window.prompt("Side 1:");
         sides[1] = window.prompt("Side 2:");
@@ -148,6 +155,7 @@ const drawTriangle = function() {
             sides[2] = 0;
             endLoop = true;
         }
+
         sides[0] = Number(sides[0]);
         sides[1] = Number(sides[1]);
         sides[2] = Number(sides[2]);
@@ -155,6 +163,7 @@ const drawTriangle = function() {
         height = sides[0];
         base = sides[1];
         hypotenuse = sides[2];
+
         if (Number.isNaN(height) || Number.isNaN(base) || Number.isNaN(hypotenuse)) {
             window.alert("One of your sides is not a number.");
         }
@@ -168,6 +177,7 @@ const drawTriangle = function() {
             window.alert("That's not a valid right triangle.");
         }
     }
+
     ctx.beginPath();
     ctx.moveTo(25, 25);
     ctx.lineTo(25, 25 + height);
@@ -188,6 +198,7 @@ const drawFace = function() {
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
     let endLoop = false;
+
     while (endLoop === false) {
         radius = window.prompt("Radius:");
         if (radius === null) {
@@ -206,18 +217,23 @@ const drawFace = function() {
             endLoop = true;
         }
     }
+
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
     ctx.stroke();
+
     ctx.beginPath();
     ctx.arc(centerX - (0.4 * radius), centerY - (0.4 * radius), 0.15 * radius, 0, 2 * Math.PI);
     ctx.stroke();
+
     ctx.beginPath();
     ctx.arc(centerX + (0.4 * radius), centerY - (0.4 * radius), 0.15 * radius, 0, 2 * Math.PI);
     ctx.stroke();
+
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
     ctx.stroke();
+
     ctx.beginPath();
     ctx.arc(centerX, centerY, 0.7 * radius, 0, Math.PI);
     ctx.stroke();
@@ -232,7 +248,8 @@ const drawPyramid = function() {
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let side;
-    let endLoop = false
+    let endLoop = false;
+
     while (endLoop === false) {
         side = window.prompt("Side:");
         if (side === null) {
@@ -251,14 +268,18 @@ const drawPyramid = function() {
             endLoop = true;
         }
     }
+
     let startingPoint = 10;
     let y = canvas.height - 10 - Number(side);
+
     for (let i = 5; i > 0; i--) {
         let x = startingPoint;
+
         for (let j = i; j > 0; j--) {
             ctx.strokeRect(x, y, Number(side), Number(side));
             x += Number(side);
         }
+
         startingPoint += Number(side) / 2;
         y -= Number(side);
     }
