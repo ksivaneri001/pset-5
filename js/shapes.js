@@ -6,18 +6,6 @@ window.onload = function() {
     document.getElementById("smile-sample").onclick = drawFaceStaff;
     document.getElementById("pyramid-sample").onclick = drawPyramidStaff;
 
-    // this is how we're connecting our buttons to our JavaScript functions. let's walk through it.
-    //
-    // document.getElementById("some-id")   <-- you need to give each button a unique ID
-    //                                          and access it in this manner
-    //
-    // onclick is an event that is fired when you click something (in our case, a button).
-    // when we give onclick a value, we're telling JavaScript what to do when we click the button.
-    // you should set onclick equal to your function names (i.e., sayHello).
-    //
-    // there are six event listeners being added for the staff solutions. you'll have an
-    // equivalent set of six event listeners for your solutions. the first one is done for you.
-
     document.getElementById("hello").onclick = sayHello;
     document.getElementById("rectangle").onclick = drawRectangle;
     document.getElementById("colored-rectangle").onclick = drawColoredRectangle;
@@ -244,7 +232,7 @@ const drawPyramid = function() {
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let side;
-    let endLoop = false;
+    let endLoop = false
     while (endLoop === false) {
         side = window.prompt("Side:");
         if (side === null) {
@@ -256,17 +244,22 @@ const drawPyramid = function() {
         else if (Number(side) < 1) {
             window.alert("Your block size must be at least 1.");
         }
+        else if (side > 100) {
+            window.alert("Your pyramid won't fit on the canvas.");
+        }
         else {
             endLoop = true;
         }
     }
+    let startingPoint = 10;
+    let y = canvas.height - 10 - Number(side);
     for (let i = 5; i > 0; i--) {
-        let x = 10;
-        let y = canvas.height - 10 - side;
-        for (let j = x; j < (x + (side * i)); j = j + side) {
-            ctx.strokeRect(j, y, side, side);
+        let x = startingPoint;
+        for (let j = i; j > 0; j--) {
+            ctx.strokeRect(x, y, Number(side), Number(side));
+            x += Number(side);
         }
-        x = x + side / 2;
-        y = y - side;
+        startingPoint += Number(side) / 2;
+        y -= Number(side);
     }
 };
